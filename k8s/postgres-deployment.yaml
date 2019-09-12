@@ -32,4 +32,12 @@ spec:
                   key: PGPASSWORD
             - name: PGDATA
               value: "/var/lib/postgresql/data/pgdata"
+      initContainers:
+        - name: pgsql-data-permission-fix
+          image: busybox
+          command: ["/bin/chmod","-R","777", "/data"]
+          volumeMounts:
+          - name: postgres-storage
+            mountPath: /data
             
+        
