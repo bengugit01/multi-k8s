@@ -30,3 +30,6 @@ spec:
                 secretKeyRef:
                   name: pgpassword
                   key: PGPASSWORD
+            - name: PGDATA
+              value: "/var/lib/postgresql/data/pgdata"
+            
