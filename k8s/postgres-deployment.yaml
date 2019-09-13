@@ -30,14 +30,14 @@ spec:
                 secretKeyRef:
                   name: pgpassword
                   key: PGPASSWORD
-            - name: PGDATA
-              value: "/var/lib/postgresql/data/pgdata"
       initContainers:
         - name: pgsql-data-permission-fix
           image: busybox
-          command: ["/bin/chmod","-R","777", "/data"]
+          command: ["sh", "-c", "chown -R 999:999 /data"]
           volumeMounts:
           - name: postgres-storage
             mountPath: /data
             
+
+
         
