@@ -24,14 +24,16 @@ spec:
           volumeMounts:
             - name: postgres-storage
               mountPath: /var/lib/postgresql/data
+              subPath: data     # https://github.com/kubernetes/website/pull/2292.  Solve the issue of crashing initdb due to non-empty directory (i.e. lost+found) 
+            - mountPath: /var/log/postgresql/logs
+              name: postgres-storage
+              subPath: logs              
           env:
             - name: PGPASSWORD
               valueFrom:
                 secretKeyRef:
                   name: pgpassword
-                  key: PGPASSWORD
-            - name: PGDATA
-              value: /var/lib/postgresql/data/pgdata               
+                  key: PGPASSWORD             
       initContainers:
         - name: pgsql-data-permission-fix
           image: busybox
