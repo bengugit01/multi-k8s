@@ -30,6 +30,8 @@ spec:
                 secretKeyRef:
                   name: pgpassword
                   key: PGPASSWORD
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata               
       initContainers:
         - name: pgsql-data-permission-fix
           image: busybox
